@@ -27,7 +27,7 @@ app.post('/posts/:id/comments', async(req, res) => {
       type: 'CommentCreated',
       data: {
         id: commentId,
-        content: commentId.content,
+        content: content,
         postId: req.params.id
       }
     })

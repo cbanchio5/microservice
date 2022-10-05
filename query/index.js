@@ -11,7 +11,7 @@ app.use(bodyParser.json())
 app.use(cors())
 
 
-app.get('/events', (req, res) => {
+app.get('/posts', (req, res) => {
 
   res.send(posts)
 
@@ -35,10 +35,11 @@ app.post('/events', (req, res) => {
     const { id, content, postId } = data
     const post = posts[postId]
 
-    post.comments.push({content, id})
+    post.comments.push({ content, id })
   }
 
   console.log(posts)
+
 
   res.send({})
 
