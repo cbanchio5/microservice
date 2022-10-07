@@ -1,26 +1,14 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const axios = require('axios')
 
 const app = express()
 
 
 const posts = {}
 
-app.use(bodyParser.json())
-app.use(cors())
-
-
-app.get('/posts', (req, res) => {
-
-  res.send(posts)
-
-})
-
-app.post('/events', (req, res) => {
-
-  const { type, data } = req.body
-
+const handleEvents = (type, data) => {
   if (type === 'PostCreated') {
 
     const { id, title } = data
@@ -50,14 +38,37 @@ app.post('/events', (req, res) => {
 
   }
 
+}
 
-  console.log(posts)
+app.use(bodyParser.json())
+app.use(cors())
 
+
+app.get('/posts', (req, res) => {
+
+  res.send(posts)
+
+})
+
+app.post('/events', (req, res) => {
+
+  const { type, data } = req.body
+
+  handleEvents(type, data)
 
   res.send({})
 
 })
 
-app.listen(4002, ()=> {
+app.listen(4002, async()=> {
   console.log("listening on 4002")
+
+  res = await axios.get('http://localhost:4005/events')
+
+
+  for (let event of res.data.events) {
+    console.log('pocessing event')
+
+    handleEvents(event.type, event.data)
+  }
 })
