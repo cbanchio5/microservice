@@ -16,7 +16,6 @@ spec:
         - name: event-bus
           image: cbanchio5/event-bus
 
-
 ---
 apiVersion: v1
 kind: Service
