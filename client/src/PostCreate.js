@@ -12,7 +12,7 @@ export default function PostCreate() {
 
   async function onSubmit(event) {
     event.preventDefault()
-    await axios.post('http://localhost:4000/posts', { title })
+    await axios.post('http://posts.com/posts', { title })
 
     setTitle('')
 

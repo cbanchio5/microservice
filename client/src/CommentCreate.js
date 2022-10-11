@@ -13,7 +13,7 @@ export default function CommentCreate(props) {
   async function onSubmit(event) {
     event.preventDefault()
 
-    await axios.post(`http://localhost:4001/posts/${props.postId}/comments`, {content})
+    await axios.post(`http://posts.com/posts/${props.postId}/comments`, {content})
 
     setContent('')
 
